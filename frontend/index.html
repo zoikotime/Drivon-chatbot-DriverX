@@ -1,0 +1,1784 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drivon – DriverX Mobile AI Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --teal: #1a7b6b;
+        --teal-light: #22a08a;
+        --yellow: #f5c518;
+        --dark: #0d1117;
+        --dark-panel: #151c25;
+        --dark-card: #1c2532;
+        --dark-input: #222d3c;
+        --border: #263040;
+        --text-primary: #eef2f7;
+        --text-muted: #7a8fa6;
+        --text-accent: #a8d5cb;
+        --bot-bubble: #1b3a33;
+        --user-bubble: #1e3a5f;
+        --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+        --radius: 18px;
+        --radius-sm: 10px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: "DM Sans", sans-serif;
+        background: var(--dark);
+        color: var(--text-primary);
+        overflow: hidden;
+      }
+
+      .app {
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 300px;
+        min-width: 300px;
+        background: var(--dark-panel);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        overflow: hidden;
+      }
+      .sidebar-header {
+        padding: 24px 20px 20px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(135deg, #0f1e2d 0%, #0d2318 100%);
+      }
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .logo-img {
+        height: 38px;
+      }
+      .sidebar-title {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(26, 123, 107, 0.18);
+        border: 1px solid rgba(26, 123, 107, 0.35);
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-size: 12px;
+        color: var(--teal-light);
+        font-weight: 500;
+      }
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #2ecc71;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .sidebar-section {
+        padding: 16px 20px 8px;
+      }
+      .sidebar-section-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 10px;
+      }
+
+      .quick-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 10px 14px;
+        cursor: pointer;
+        color: var(--text-primary);
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        transition: all 0.2s;
+        text-align: left;
+        margin-bottom: 6px;
+      }
+      .quick-btn:hover {
+        background: var(--dark-card);
+        border-color: var(--teal);
+        color: var(--teal-light);
+      }
+      .quick-btn .icon {
+        font-size: 16px;
+      }
+
+      .feature-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 0 20px 16px;
+      }
+      .tag {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 20px;
+        background: rgba(245, 197, 24, 0.1);
+        border: 1px solid rgba(245, 197, 24, 0.2);
+        color: var(--yellow);
+      }
+
+      .sidebar-footer {
+        margin-top: auto;
+        padding: 16px 20px;
+        border-top: 1px solid var(--border);
+      }
+      .contact-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+      }
+      .contact-row a {
+        color: var(--text-accent);
+        text-decoration: none;
+      }
+      .contact-row a:hover {
+        color: var(--teal-light);
+      }
+
+      .chat-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: var(--dark);
+      }
+
+      .chat-topbar {
+        padding: 16px 28px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--dark-panel);
+      }
+      .chat-topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .avatar-ring {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #0f1f2b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--teal-light);
+        box-shadow: 0 0 12px rgba(26, 123, 107, 0.4);
+      }
+      .avatar-ring img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .chat-topbar-info h2 {
+        font-family: "Syne", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .chat-topbar-info p {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 1px;
+      }
+      .topbar-actions {
+        display: flex;
+        gap: 8px;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--dark-card);
+        border: 1px solid var(--border);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        transition: all 0.2s;
+        color: var(--text-muted);
+      }
+      .icon-btn:hover {
+        background: var(--dark-input);
+        border-color: var(--teal);
+        color: var(--teal-light);
+      }
+
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .messages::-webkit-scrollbar {
+        width: 5px;
+      }
+      .messages::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .messages::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+
+      .msg-row {
+        display: flex;
+        gap: 12px;
+        animation: slideUp 0.3s ease;
+      }
+      .msg-row.user {
+        flex-direction: row-reverse;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .msg-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin-top: 4px;
+      }
+      .msg-avatar.bot {
+        background: linear-gradient(135deg, var(--teal), #0f4d3a);
+        border: 1px solid var(--teal-light);
+      }
+      .msg-avatar.user {
+        background: linear-gradient(135deg, #1e3a5f, #0d2040);
+        border: 1px solid #2d5080;
+      }
+
+      .msg-content {
+        max-width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .msg-row.user .msg-content {
+        align-items: flex-end;
+      }
+
+      .bubble {
+        padding: 13px 17px;
+        border-radius: var(--radius);
+        line-height: 1.6;
+        font-size: 14px;
+        position: relative;
+        word-break: break-word;
+      }
+      .bubble.bot {
+        background: var(--bot-bubble);
+        border: 1px solid rgba(26, 123, 107, 0.25);
+        border-bottom-left-radius: 4px;
+        color: var(--text-primary);
+      }
+      .bubble.user {
+        background: var(--user-bubble);
+        border: 1px solid rgba(30, 90, 160, 0.3);
+        border-bottom-right-radius: 4px;
+        color: var(--text-primary);
+      }
+      .bubble strong {
+        color: var(--teal-light);
+        font-weight: 600;
+      }
+      .bubble a {
+        color: var(--yellow);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .bubble a:hover {
+        text-decoration: underline;
+      }
+      .bubble ul {
+        padding-left: 18px;
+        margin-top: 6px;
+      }
+      .bubble ul li {
+        margin-bottom: 4px;
+      }
+      .bubble ol {
+        padding-left: 18px;
+        margin-top: 6px;
+      }
+      .bubble ol li {
+        margin-bottom: 4px;
+      }
+      .bubble .check {
+        color: var(--teal-light);
+      }
+
+      .msg-time {
+        font-size: 11px;
+        color: var(--text-muted);
+        padding: 0 4px;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .chip {
+        padding: 7px 14px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: var(--dark-card);
+        font-size: 13px;
+        color: var(--text-accent);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .chip:hover {
+        background: var(--teal);
+        border-color: var(--teal);
+        color: #fff;
+        transform: translateY(-1px);
+      }
+
+      .typing-indicator {
+        display: none;
+        align-items: center;
+        gap: 12px;
+      }
+      .typing-indicator.visible {
+        display: flex;
+      }
+      .typing-dots {
+        display: flex;
+        gap: 5px;
+        padding: 12px 16px;
+        background: var(--bot-bubble);
+        border-radius: var(--radius);
+        border-bottom-left-radius: 4px;
+        border: 1px solid rgba(26, 123, 107, 0.25);
+      }
+      .typing-dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--teal-light);
+        animation: bounce 1.2s ease-in-out infinite;
+      }
+      .typing-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .typing-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes bounce {
+        0%,
+        60%,
+        100% {
+          transform: translateY(0);
+        }
+        30% {
+          transform: translateY(-6px);
+        }
+      }
+
+      .input-bar {
+        padding: 16px 28px 20px;
+        border-top: 1px solid var(--border);
+        background: var(--dark-panel);
+      }
+      .input-wrap {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        background: var(--dark-input);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 10px 14px;
+        transition: border-color 0.2s;
+      }
+      .input-wrap:focus-within {
+        border-color: var(--teal);
+      }
+      .input-wrap textarea {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        resize: none;
+        color: var(--text-primary);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        max-height: 120px;
+        min-height: 24px;
+        line-height: 1.5;
+      }
+      .input-wrap textarea::placeholder {
+        color: var(--text-muted);
+      }
+      .send-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, var(--teal), var(--teal-light));
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(26, 123, 107, 0.4);
+      }
+      .send-btn:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 16px rgba(26, 123, 107, 0.6);
+      }
+      .send-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .input-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 2px 0;
+      }
+      .input-footer small {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      .welcome-card {
+        background: linear-gradient(135deg, #0f2a22 0%, #0d1a2e 100%);
+        border: 1px solid rgba(26, 123, 107, 0.3);
+        border-radius: var(--radius);
+        padding: 22px 24px;
+        margin-bottom: 4px;
+      }
+      .welcome-card h3 {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .welcome-card p {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+      .welcome-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .welcome-tile {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .welcome-tile:hover {
+        background: rgba(26, 123, 107, 0.15);
+        border-color: var(--teal);
+      }
+      .welcome-tile .tile-icon {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+      .welcome-tile .tile-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-accent);
+      }
+      .welcome-tile .tile-sub {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+        .chat-topbar {
+          padding: 12px 16px;
+        }
+        .messages {
+          padding: 16px;
+        }
+        .input-bar {
+          padding: 12px 16px 16px;
+        }
+        .msg-content {
+          max-width: 85%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-wrap">
+            <img
+              src="../frontend/public/main logo.svg"
+              alt="DriverX Mobile"
+              class="logo-img"
+            />
+          </div>
+          <div class="status-pill">
+            <span class="status-dot"></span> Drivon AI • Online 24/7
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Quick Actions</div>
+          <button class="quick-btn" onclick="sendMessage('Check out plans')">
+            <span class="icon">📱</span> Browse Driver Plans
+          </button>
+          <button class="quick-btn" onclick="sendMessage('prepaid plans')">
+            <span class="icon">💳</span> Prepaid Plans
+          </button>
+          <button class="quick-btn" onclick="sendMessage('postpaid plans')">
+            <span class="icon">📅</span> Postpaid Plans
+          </button>
+          <button class="quick-btn" onclick="sendMessage('Account help')">
+            <span class="icon">🔧</span> Account & Billing Help
+          </button>
+          <button class="quick-btn" onclick="sendMessage('Coverage check')">
+            <span class="icon">📡</span> Coverage Map
+          </button>
+          <button class="quick-btn" onclick="sendMessage('fleet solutions')">
+            <span class="icon">🚗</span> Fleet Solutions
+          </button>
+          <button class="quick-btn" onclick="sendMessage('driver perks')">
+            <span class="icon">🎁</span> Driver Perks & Benefits
+          </button>
+          <button
+            class="quick-btn"
+            onclick="sendMessage('Talk to a real person')"
+          >
+            <span class="icon">🧑‍💼</span> Talk to a Human
+          </button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">Features</div>
+        </div>
+        <div class="feature-tags">
+          <span class="tag">5G Ready</span>
+          <span class="tag">Hotspot</span>
+          <span class="tag">GPS Tracking</span>
+          <span class="tag">Data plans</span>
+          <span class="tag">Gig App Priority</span>
+          <span class="tag">Fleet Mgmt</span>
+          <span class="tag">eSIM</span>
+          <span class="tag">global services</span>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="contact-row">
+            📞 <a href="tel:8003990087">800-399-0087</a>
+          </div>
+          <div class="contact-row">
+            💬
+            <a
+              href="https://www.driverxmobile.com/24-7-driver-support/"
+              target="_blank"
+              >Live Chat Support</a
+            >
+          </div>
+          <div class="contact-row">
+            📧
+            <a href="mailto:info@driverxmobile.com">info@driverxmobile.com</a>
+          </div>
+          <div
+            class="contact-row"
+            style="margin-top: 8px; font-size: 11px; color: var(--text-muted)"
+          >
+            Mon–Sat 8:30am–8:30pm · Sun 10am–6pm
+          </div>
+        </div>
+      </aside>
+
+      <!-- CHAT -->
+      <main class="chat-wrap">
+        <div class="chat-topbar">
+          <div class="chat-topbar-left">
+            <div class="avatar-ring">
+              <img src="./public/driveX.jpeg" alt="DriverX logo" />
+            </div>
+            <div class="chat-topbar-info">
+              <h2>Drivon</h2>
+              <p>DriverX Mobile AI Assistant • Always on the road with you</p>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button
+              class="icon-btn"
+              title="Coverage Map"
+              onclick="sendMessage('Coverage check')"
+            >
+              📡
+            </button>
+            <button class="icon-btn" title="Clear Chat" onclick="clearChat()">
+              🗑️
+            </button>
+          </div>
+        </div>
+
+        <div class="messages" id="messages">
+          <div class="msg-row">
+            <div class="avatar-ring">
+              <img src="./public/driveX.jpeg" alt="DriverX logo" />
+            </div>
+            <div class="msg-content">
+              <div class="welcome-card">
+                <h3>👋 Hey there! Welcome to DriverX Mobile</h3>
+                <p>
+                  I'm <strong>Drivon</strong> — your AI assistant, built
+                  specifically for drivers like you. Whether you need a plan,
+                  account help, or just want to know what perks you're getting,
+                  I've got you covered 24/7.
+                </p>
+                <div class="welcome-grid">
+                  <div
+                    class="welcome-tile"
+                    onclick="sendMessage('Check out plans')"
+                  >
+                    <div class="tile-icon">📱</div>
+                    <div class="tile-label">View Plans</div>
+                    <div class="tile-sub">Prepaid, postpaid & fleet</div>
+                  </div>
+                  <div
+                    class="welcome-tile"
+                    onclick="sendMessage('Account help')"
+                  >
+                    <div class="tile-icon">🔧</div>
+                    <div class="tile-label">Account Help</div>
+                    <div class="tile-sub">Login, billing, SIM issues</div>
+                  </div>
+                  <div
+                    class="welcome-tile"
+                    onclick="sendMessage('Coverage check')"
+                  >
+                    <div class="tile-icon">📡</div>
+                    <div class="tile-label">Check Coverage</div>
+                    <div class="tile-sub">Your routes, your signal</div>
+                  </div>
+                  <div
+                    class="welcome-tile"
+                    onclick="sendMessage('Talk to a real person')"
+                  >
+                    <div class="tile-icon">🧑‍💼</div>
+                    <div class="tile-label">Talk to a Human</div>
+                    <div class="tile-sub">Call or live chat</div>
+                  </div>
+                </div>
+              </div>
+              <span class="msg-time">Just now</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div
+          class="typing-indicator"
+          id="typingIndicator"
+          style="
+            padding: 0 28px 8px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+          "
+        >
+          <div
+            class="msg-avatar bot"
+            style="
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              flex-shrink: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 16px;
+            "
+          >
+            🚗
+          </div>
+          <div class="typing-dots"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="input-bar">
+          <div class="input-wrap">
+            <textarea
+              id="userInput"
+              placeholder="Ask Drivon anything — plans, coverage, billing…"
+              rows="1"
+              onkeydown="handleKey(event)"
+              oninput="autoResize(this)"
+            ></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+              ➤
+            </button>
+          </div>
+          <div class="input-footer">
+            <small
+              >⚡ Drivon responds instantly · Powered by DriverX Mobile
+              AI</small
+            >
+            <small
+              ><a
+                href="https://www.driverxmobile.com/24-7-driver-support/"
+                target="_blank"
+                style="color: var(--teal-light); text-decoration: none"
+                >Need a human? →</a
+              ></small
+            >
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // ─── KNOWLEDGE BASE (keyword → route) ───────────────────────────────────────
+      const routes = {
+        greeting: [
+          "hi",
+          "hello",
+          "hey",
+          "sup",
+          "yo",
+          "good morning",
+          "good evening",
+          "what's up",
+        ],
+        plans: [
+          "check out plans",
+          "view plans",
+          "browse plans",
+          "check plans",
+          "show plans",
+          "need a plan",
+          "i need a plan",
+          "see plans",
+          "what plans",
+          "which plan",
+          "plan options",
+          "all plans",
+        ],
+        prepaid: [
+          "prepaid",
+          "starter",
+          "cruise",
+          "power",
+          "unlimited",
+          "starter plan",
+          "cruise plan",
+          "power plan",
+          "unlimited plan",
+          "no contract",
+          "pay as you go",
+          "no credit check",
+          "prepaid details",
+          "prepaid plan",
+        ],
+        postpaid: [
+          "postpaid",
+          "flex",
+          "essential",
+          "infinite",
+          "elite",
+          "post-paid",
+          "flex plan",
+          "essential plan",
+          "infinite plan",
+          "elite plan",
+          "pay monthly",
+          "postpaid details",
+          "postpaid plan",
+          "post paid",
+        ],
+        fleet: [
+          "fleet",
+          "business plan",
+          "company plan",
+          "i run a fleet",
+          "large fleet",
+          "vehicles",
+          "commercial",
+          "enterprise",
+          "bulk",
+          "small fleet",
+          "larger operation",
+          "fleet solutions",
+          "business solutions",
+        ],
+        dataonly: [
+          "data only",
+          "light data",
+          "medium data",
+          "heavy data",
+          "data-only",
+          "tablet plan",
+          "tablet",
+          "hotspot plan",
+          "iot",
+          "data only plans",
+          "tablets",
+          "hotspots",
+          "data only device",
+          "data device",
+        ],
+        coverage: [
+          "coverage",
+          "signal",
+          "network",
+          "area",
+          "zip",
+          "where can i use",
+          "roam",
+        ],
+        international: [
+          "international",
+          "roaming",
+          "abroad",
+          "other country",
+          "calling internationally",
+          "free international",
+          "100 countries",
+        ],
+        account: ["account", "account help", "my account"],
+        cantlogin: [
+          "can't log in",
+          "cant log in",
+          "can't login",
+          "cant login",
+          "login issue",
+          "login problem",
+          "forgot password",
+          "reset password",
+          "password reset",
+          "locked out",
+          "unable to login",
+          "unable to log in",
+          "trouble logging in",
+          "trouble logging",
+          "login",
+          "log in",
+          "password",
+        ],
+        changeplan: [
+          "change plan",
+          "change my plan",
+          "upgrade",
+          "downgrade",
+          "switch plan",
+          "switch my plan",
+          "manage plan",
+          "different plan",
+          "upgrade plan",
+          "downgrade plan",
+        ],
+        newplan: [
+          "i need a new plan",
+          "need a new plan",
+          "get a plan",
+          "new plan",
+          "help me choose plan",
+        ],
+        billing: [
+          "billing",
+          "payment",
+          "invoice",
+          "receipt",
+          "charge",
+          "bill",
+          "didn't go through",
+          "update payment",
+          "payment method",
+          "payment didn't",
+          "billing question",
+        ],
+        sim: [
+          "sim",
+          "esim",
+          "e-sim",
+          "activate",
+          "activation",
+          "qr code",
+          "physical sim",
+          "sim card",
+          "sim issues",
+          "switching phones",
+          "switch phone",
+          "replace sim",
+          "sim not detected",
+        ],
+        activation: [
+          "activate",
+          "activate sim",
+          "activation",
+          "activate esim",
+          "sim activation",
+        ],
+        noservice: [
+          "no service",
+          "no signal",
+          "not working",
+          "troubleshoot",
+          "can't connect",
+          "dropped",
+          "outage",
+          "restart",
+          "airplane mode",
+          "apn",
+        ],
+        servicetrouble: [
+          "trouble with my service",
+          "service issue",
+          "service problem",
+          "data not working",
+          "calls dropping",
+        ],
+        cancel: [
+          "cancel",
+          "cancellation",
+          "return",
+          "don't renew",
+          "stop service",
+        ],
+        signup: [
+          "sign up",
+          "signup",
+          "how do i start",
+          "get started",
+          "how to buy",
+          "purchase",
+          "order",
+          "checkout",
+          "new customer",
+        ],
+        keepnumber: [
+          "keep my number",
+          "port",
+          "transfer number",
+          "number transfer",
+          "same number",
+          "keep number",
+          "porting",
+        ],
+        byod: [
+          "bring my phone",
+          "byod",
+          "own phone",
+          "compatible",
+          "phone compatible",
+          "unlocked",
+          "compatible phone",
+          "bring your own",
+          "gsm",
+        ],
+        hotspot: [
+          "hotspot",
+          "data sharing",
+          "tethering",
+          "wifi sharing",
+          "personal hotspot",
+          "hotspot details",
+          "mobile hotspot",
+        ],
+        fiveg: ["5g", "five g", "5g coverage", "5g access"],
+        perks: [
+          "perk",
+          "perks",
+          "benefit",
+          "benefits",
+          "discount",
+          "cashback",
+          "fuel discount",
+          "tax deduction",
+          "driver perks",
+          "gig app",
+          "instacart",
+          "priority data",
+          "offers",
+        ],
+        human: [
+          "human",
+          "real person",
+          "agent",
+          "talk to someone",
+          "live chat",
+          "phone support",
+          "call us",
+          "customer care",
+          "talk to a human",
+        ],
+        pricing: [
+          "how much",
+          "price",
+          "cost",
+          "pricing",
+          "what does it cost",
+          "affordable",
+          "budget",
+          "cheap",
+        ],
+        support: [
+          "help",
+          "support",
+          "help/support",
+          "faq",
+          "self service",
+          "24/7 support",
+        ],
+        partner: [
+          "partner",
+          "partner offer",
+          "become a partner",
+          "partnership opportunities",
+        ],
+        about: [
+          "about",
+          "about us",
+          "who are you",
+          "what is driverx",
+          "company",
+          "mission",
+        ],
+        contact: ["contact", "contact us", "contact driverx"],
+        gigdriver: [
+          "gig driver",
+          "uber",
+          "lyft",
+          "doordash",
+          "delivery driver",
+          "rideshare",
+          "i'm an uber driver",
+          "i am an uber driver",
+          "i'm a delivery driver",
+          "i am a delivery driver",
+          "i drive part-time",
+          "i drive part time",
+        ],
+        closing: [
+          "thanks",
+          "thank you",
+          "bye",
+          "goodbye",
+          "that's all",
+          "done",
+        ],
+      };
+
+      // ─── RESPONSES (aligned exactly to the DOCX flows) ──────────────────────────
+      const responses = {
+        greeting: {
+          text: `Hey! 👋 Great to have you here at DriverX Mobile.\n\nI'm <strong>Drivon</strong> — your 24/7 AI assistant built for drivers like you.\n\nWhat brings you here today?`,
+          chips: [
+            "View Plans",
+            "Account Help",
+            "Coverage Check",
+            "Driver Perks",
+            "Talk to a Human",
+          ],
+        },
+
+        plans: {
+          text: `Great! What kind of plan works for you?\n\n<strong>📱 Individual Drivers</strong>\n<ul><li><strong>Prepaid</strong> — Pay as you go, no contracts, no credit check</li><li><strong>Postpaid</strong> — Use now, pay monthly, extra perks</li></ul>\n\n<strong>🚗 Fleet / Business</strong>\n<ul><li><strong>Small Fleet</strong> (5–20 vehicles) — Centralized billing, GPS tracking</li><li><strong>Larger Operation</strong> (20+ vehicles) — Custom packages, dedicated manager</li></ul>\n\n<strong>💾 Data-Only</strong> — For tablets, hotspots & IoT devices\n\nJust tell me which one fits you!`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Fleet plans",
+            "Data-only plans",
+          ],
+        },
+
+        prepaid: {
+          text: `Perfect! Our prepaid plans are super flexible — <strong>no contracts, no credit checks</strong>.\n\nWe've got 4 options:\n<ul><li>⭐ <strong>Starter</strong> — Light users, weekend drivers</li><li>🚗 <strong>Cruise</strong> — Regular daily drivers</li><li>⚡ <strong>Power</strong> — Heavy app users</li><li>🔄 <strong>Unlimited</strong> — Full-time, always on the road</li></ul>\n\nAll prepaid plans include:\n<span class="check">✓</span> No contract · No credit check\n<span class="check">✓</span> 5G access where available\n<span class="check">✓</span> Mobile hotspot included\n<span class="check">✓</span> Free international texting\n<span class="check">✓</span> Priority data for gig apps\n<span class="check">✓</span> Fuel discounts & cashback\n\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">See all Prepaid Plans & pricing →</a>\n\nNot sure which fits your driving style? Tell me and I'll help narrow it down!`,
+          chips: [
+            "Postpaid plans",
+            "What's the difference?",
+            "Sign me up",
+            "Talk to a Human",
+          ],
+        },
+
+        postpaid: {
+          text: `Got it! Postpaid gives you more flexibility — use it now, pay at month's end.\n\nWe've got 4 options:\n<ul><li>🌀 <strong>Flex</strong> — Part-timers, occasional drivers</li><li>✅ <strong>Essential</strong> — Daily drivers</li><li>♾️ <strong>Infinite</strong> — Full-time multi-app drivers</li><li>🪙<strong>Elite</strong> — High earners, premium features</li><li>👑 <strong>Enterprise</strong> — Fleet managers, trucking companies, rental operators</li></ul>\n\nPostpaid extras you get:\n<span class="check">✓</span> Device financing options\n<span class="check">✓</span> Tax deduction reports\n<span class="check">✓</span> More flexibility than prepaid\n<span class="check">✓</span> All the same network perks\n\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">See all Postpaid Plans & pricing →</a>\n\nQuestions? Just ask!`,
+          chips: [
+            "Prepaid plans",
+            "What's the difference?",
+            "Sign me up",
+            "Talk to a Human",
+          ],
+        },
+
+        plansdiff: {
+          text: `Great question! Here's the key difference:\n\n<strong>Prepaid</strong> = Pay upfront each month. No contracts, no credit check. Perfect if you want full control and flexibility.\n\n<strong>Postpaid</strong> = Use it now, pay at month's end. A bit more flexibility, and some extra perks like device financing and tax deduction reports.\n\nBoth get you the <strong>same awesome Tier-1 network</strong>!\n\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Prepaid Plans</a>\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">Postpaid Plans</a>\n\nWhich sounds better for you?`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Sign me up",
+            "Talk to a Human",
+          ],
+        },
+
+        fleet: {
+          text: `Nice! Running a fleet is no joke — we make it easier. 🚗\n\n<strong>Small Fleet (5–20 vehicles)</strong>\n<span class="check">✓</span> Centralized billing\n<span class="check">✓</span> Fleet management dashboard\n<span class="check">✓</span> Shared data pools\n<span class="check">✓</span> GPS tracking options\n\n👉 <a href="https://www.driverxmobile.com/business-plans/" target="_blank">Business Plans →</a>\n\n<strong>Larger Operation (20+ vehicles)</strong>\n<span class="check">✓</span> Dedicated account manager\n<span class="check">✓</span> Custom data packages\n<span class="check">✓</span> Full telematics integration\n<span class="check">✓</span> Priority support line\n\n👉 <a href="https://www.driverxmobile.com/contact-enterprise-sales/" target="_blank">Contact Enterprise Sales →</a>\n\n📞 <a href="tel:8003990087">800-399-0087</a>`,
+          chips: ["Data-only for devices", "Talk to a Human"],
+        },
+
+        dataonly: {
+          text: `Smart! Data-only plans are perfect for tablets, backup devices, or IoT. 💾\n\nWe've got 3 tiers based on how much data you need:\n<ul><li><strong>Light use</strong> — Perfect for occasional device connectivity</li><li> <strong>Medium use</strong> — Regular tablet or hotspot usage</li><li><strong>Heavy use</strong> — Always-on fleet devices & IoT</li></ul>\n\nPlus you can add voice/text anytime!\n\n👉 <a href="https://www.driverxmobile.com/data-only-plans/" target="_blank">See Data-Only Plans →</a>\n\nQuestions? Fire away!`,
+          chips: ["Fleet plans", "Hotspot info", "Talk to a Human"],
+        },
+
+        coverage: {
+          text: `Coverage is everything when you're driving! 🛣️\n\nDriverX runs on a <strong>Tier-1 nationwide network</strong>, covering 99% of Americans — same towers as the big carriers, way better prices.\n\nWhere are you mainly driving?\n<ul><li>🏙️ City/metro area — <strong>excellent coverage</strong></li><li>🏘️ Suburbs — <strong>solid coverage</strong></li><li>🛤️ Rural/highways — <strong>generally strong</strong></li><li>🗺️ All over — <strong>all 50 states covered</strong></li></ul>\n\n<span class="check">✓</span> 5G where available — automatic, no extra charge\n\n🗺️ <a href="https://mvnoc.ai/coverage-map" target="_blank">Check your exact area on the coverage map →</a>\n\nHave a specific route or zip code you're worried about? Let me know!`,
+          chips: [
+            "International roaming",
+            "5G coverage",
+            "View plans",
+            "Talk to a Human",
+          ],
+        },
+
+        international: {
+          text: `Good question! We've got you covered internationally. 🌍\n\nAll plans include:\n<span class="check">✓</span> <strong>Free international texting</strong>\n<span class="check">✓</span> <strong>Free calls to 100+ countries</strong> (varies by plan)\n\nHigher-tier plans also include:\n<span class="check">✓</span> Roaming in select countries\n\nPlanning to drive abroad? Let me know where and I can point you to the right plan!\n\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Prepaid Plans (international features)</a>\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">Postpaid Plans (international features)</a>\n📞 <a href="tel:8003990087">800-399-0087</a>`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Coverage map",
+            "Talk to a Human",
+          ],
+        },
+
+        account: {
+          text: `I've got you! What's going on? 🔧\n\n<ul><li>🔑 <strong>Can't log in?</strong> — Password reset, cache issues, or wrong email</li><li>🔄 <strong>Change / upgrade your plan?</strong> — Easy self-service steps</li><li>💳 <strong>Billing & payments?</strong> — My DriverX → Account Settings → Payment Methods</li><li>📦 <strong>Cancel?</strong> — Prepaid: just don't renew. Postpaid: call <a href="tel:8003990087">800-399-0087</a></li><li>📶 <strong>SIM issues?</strong> — Tap "SIM card issues" below</li></ul>\n\nTap what applies and I'll walk you through it!`,
+          chips: [
+            "Can't log in",
+            "Change my plan",
+            "SIM card issues",
+            "Billing question",
+            "Cancel service",
+            "Talk to a Human",
+          ],
+        },
+
+        cantlogin: {
+          text: `No worries — happens to everyone! Here's how to get back in: 🔑\n\n<strong>Quick fixes to try first:</strong>\n<ol><li>Reset your password at <a href="https://www.driverxmobile.com" target="_blank">My DriverX portal</a></li><li>Clear your browser cache and cookies, then try again</li><li>Make sure you're using the <strong>exact email address you signed up with</strong></li><li>Try a different browser or incognito/private mode</li></ol>\n\n<strong>Still stuck?</strong> Our team can verify your account and get you back in fast:\n\n📞 <a href="tel:8003990087">800-399-0087</a>\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Live Chat Support →</a>\n\nWe'll have you back in no time!`,
+          chips: [
+            "Change my plan",
+            "Billing question",
+            "Account help",
+            "Talk to a Human",
+          ],
+        },
+
+        changeplan: {
+          text: `Easy! You can upgrade, downgrade, or switch anytime. 🔄\n\n<strong>Here's how:</strong>\n<ol><li>Log into <a href="https://www.driverxmobile.com" target="_blank">My DriverX</a></li><li>Go to <strong>"Manage Plan"</strong></li><li>Pick your new plan</li></ol>\n\n⏰ Changes take effect at your <strong>next billing cycle</strong>.\n\n<strong>Need help deciding which plan to switch to?</strong>\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">View Prepaid Plans →</a>\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">View Postpaid Plans →</a>\n\nOr just tell me how you drive and I'll recommend the best fit!\n\nNeed a hand? We're here:\n📞 <a href="tel:8003990087">800-399-0087</a>\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Live Chat</a>`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Billing question",
+            "Talk to a Human",
+          ],
+        },
+
+        newplan: {
+          text: `Got it! Are you currently a driver, or running a fleet?\n\nAnd are you looking for prepaid or postpaid? (Or not sure - that's cool too!)`,
+          chips: [
+            "Individual driver",
+            "Fleet / business",
+            "Prepaid plans",
+            "Postpaid plans",
+          ],
+        },
+
+        billing: {
+          text: `Got it — let me help with your billing question! 💳\n\n<strong>Common billing issues:</strong>\n<ul><li>💳 <strong>Update payment method:</strong> My DriverX → Account Settings → Payment Methods</li><li>📄 <strong>Didn't receive invoice:</strong> Check your email (including spam) or download from My DriverX</li><li>❌ <strong>Payment declined:</strong> Check card details, ensure sufficient funds, contact your bank if it persists</li><li>❓ <strong>Don't understand a charge:</strong> Call or chat us and we'll explain it right away</li><li>🧾 <strong>Need a receipt:</strong> Download from My DriverX account portal</li></ul>\n\nFor detailed billing help:\n📞 <a href="tel:8003990087">800-399-0087</a>\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Live Chat Support</a>`,
+          chips: [
+            "Change my plan",
+            "Cancel service",
+            "Account help",
+            "Talk to a Human",
+          ],
+        },
+
+        sim: {
+          text: `Ugh, SIM problems are annoying. Let's fix it.\n\nWhat's happening?\n<ul><li>No signal/service</li><li>SIM not recognized</li><li>Need a replacement</li><li>Switching phones</li></ul>\n\nIf that doesn't work:\n📞 Call: <a href="tel:8003990087">800-399-0087</a> (we can ship a replacement same day)\n💬 Chat: <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">https://www.driverxmobile.com/24-7-driver-support/</a>`,
+          chips: ["No service help", "Replace SIM", "Talk to a Human"],
+        },
+
+        activation: {
+          text: `### How to Activate Your SIM\n\n<strong>Got an eSIM?</strong>\nCheck your email for the QR code, scan it, and follow the prompts. Takes about 2 minutes.\n\n<strong>Got a physical SIM?</strong>\n<ol><li>Pop it in your phone</li><li>Go to <a href="https://www.driverxmobile.com/activate" target="_blank">driverxmobile.com/activate</a></li><li>Enter the SIM number (on the card)</li><li>Follow the steps</li></ol>\n\nNeed help?\n📞 <a href="tel:8003990087">800-399-0087</a>\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">https://www.driverxmobile.com/24-7-driver-support/</a>`,
+          chips: [
+            "SIM card issues",
+            "No service help",
+            "Bring my own phone",
+            "Talk to a Human",
+          ],
+        },
+
+        noservice: {
+          text: `Ugh, no service issues are the worst. Let's fix it! 🔧\n\n<strong>Quick fixes to try first:</strong>\n<ol><li>Restart your phone</li><li>Toggle Airplane Mode on → wait 10 seconds → off again</li><li>Check if you have bars but no data — might need to update APN settings</li><li>Make sure your bill is paid up</li></ol>\n\n<strong>Still not working?</strong> Call us immediately — we can check for outages or issues on your account right away.\n\n📞 <a href="tel:8003990087">800-399-0087</a>\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Live Chat Support</a>`,
+          chips: ["SIM card issues", "Account help", "Talk to a Human"],
+        },
+
+        servicetrouble: {
+          text: `Ah man, that's frustrating. Let me help! 🔧\n\nAre you dealing with:\n<ul><li>No signal</li><li>Data not working</li><li>Calls dropping</li><li>Something else</li></ul>\n\nIf you want immediate help, call:\n📞 <a href="tel:8003990087">800-399-0087</a>\n\nOr I can start with troubleshooting right here.`,
+          chips: [
+            "No service help",
+            "SIM card issues",
+            "Billing question",
+            "Talk to a Human",
+          ],
+        },
+
+        cancel: {
+          text: `Here's how cancellation works for each plan type:\n\n<strong>Prepaid plans:</strong>\nSimply don't renew next month. No penalties, no fees. Easy as that!\n\n<strong>Postpaid plans:</strong>\nCall us at <a href="tel:8003990087">800-399-0087</a> to process cancellation.\n\n<strong>Unused SIM returns:</strong>\nWe have a 30-day return policy for unused SIMs.\n\nNeed more details?\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Chat with us</a>\n📞 <a href="tel:8003990087">800-399-0087</a>`,
+          chips: ["Account help", "Change my plan", "Talk to a Human"],
+        },
+
+        signup: {
+          text: `Super easy! Signing up takes about 5 minutes. 🚀\n\n<strong>Quick steps:</strong>\n<ol><li>Pick your plan</li><li>Check out (we take all major cards)</li><li>Get your <strong>eSIM instantly</strong> OR wait 2 days for a physical SIM</li><li>Activate and you're rolling!</li></ol>\n\nStart here:\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Prepaid Plans (no contract)</a>\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">Postpaid Plans (more flexibility)</a>\n\nWant help choosing a plan first? Just tell me how you drive!`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Bring my own phone",
+            "Keep my number",
+          ],
+        },
+
+        keepnumber: {
+          text: `Yes! 100% — you can keep your number. 📱\n\nWhen you sign up, there's a super simple step to transfer (port) your existing number over. It usually takes a <strong>few hours, sometimes up to 24 hours</strong>.\n\n<span class="check">✓</span> You won't lose service during the switch\n<span class="check">✓</span> Works from any carrier\n<span class="check">✓</span> No extra fees\n\nStart here and follow the number transfer step:\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Sign up & keep your number →</a>\n\nNeed help? Call us: <a href="tel:8003990087">800-399-0087</a>`,
+          chips: [
+            "Bring my own phone",
+            "Sign up",
+            "Prepaid plans",
+            "Talk to a Human",
+          ],
+        },
+
+        byod: {
+          text: `Absolutely! Bring your phone, keep your number.\n\nAs long as it's unlocked and GSM-compatible, you're good to go.\n\nNot sure? We can check your phone's compatibility when you sign up.\n\nStart here:\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">https://www.driverxmobile.com/prepaid-plans/</a>\n\nOr call us with your phone model: <a href="tel:8003990087">800-399-0087</a>`,
+          chips: [
+            "Keep my number",
+            "Sign up",
+            "Prepaid plans",
+            "Talk to a Human",
+          ],
+        },
+
+        hotspot: {
+          text: `Yep! All DriverX plans include mobile hotspot. 📶\n\nYou get anywhere from <strong>1GB to 50GB of hotspot data</strong> depending on your plan.\n\nPerfect for:\n<span class="check">✓</span> Passengers who need WiFi\n<span class="check">✓</span> Your tablet or laptop\n<span class="check">✓</span> Backup internet at home\n\n<strong>How to turn it on:</strong>\n<ul><li>📱 <strong>iPhone:</strong> Settings → Personal Hotspot → Turn On</li><li>🤖 <strong>Android:</strong> Settings → Network → Hotspot & Tethering</li></ul>\n\n<strong>Need more hotspot data?</strong>\nYou can add more through My DriverX or call us: <a href="tel:8003990087">800-399-0087</a>\n\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Check your plan's hotspot allowance →</a>`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Driver perks",
+            "Talk to a Human",
+          ],
+        },
+
+        fiveg: {
+          text: `Yes! <strong>All our plans include 5G access</strong> where available. 🚀\n\nYou'll automatically get the fastest speeds in your area — 5G, LTE, whatever's strongest.\n\n<span class="check">✓</span> No extra charge\n<span class="check">✓</span> No special plan needed\n<span class="check">✓</span> Automatic switching between 5G and LTE\n<span class="check">✓</span> Same Tier-1 nationwide network\n\n🗺️ <a href="https://mvnoc.ai/coverage-map" target="_blank">Check 5G coverage in your area →</a>`,
+          chips: ["Coverage map", "View plans", "Driver perks"],
+        },
+
+        perks: {
+          text: `Oh man, we've got perks! 🎉 DriverX is way more than just a phone plan.\n\n<strong>Exclusive Driver Benefits:</strong>\n<span class="check">✓</span> <strong>Fuel discounts</strong> at partner stations\n<span class="check">✓</span> <strong>Cashback programs</strong> on eligible spending\n<span class="check">✓</span> <strong>Priority data for gig apps</strong> (Uber, Lyft, DoorDash, Instacart)\n<span class="check">✓</span> <strong>Free device health checks</strong>\n<span class="check">✓</span> <strong>Built-in hotspot</strong> (1GB–50GB depending on plan)\n<span class="check">✓</span> <strong>Partner deals</strong> on insurance, maintenance & legal services\n<span class="check">✓</span> <strong>Tax deduction reports</strong> (postpaid plans)\n<span class="check">✓</span> <strong>5G access</strong> — automatic, no extra charge\n\nIt's not just a phone plan — it's support for your whole business!\n\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">See all plan details →</a>`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Hotspot info",
+            "5G coverage",
+          ],
+        },
+
+        gigdriver: {
+          text: `Perfect! That's literally what we built this for.\n\nSince you're on Uber/Lyft/DoorDash, you probably need:\n<ul><li>Solid data that doesn't cut out</li><li>Good hotspot for downtime</li><li>Reliable GPS/navigation</li></ul>\n\nAre you full-time or part-time?`,
+          chips: [
+            "I'm full-time",
+            "I'm part-time",
+            "Driver perks",
+            "Coverage check",
+          ],
+        },
+
+        contact: {
+          text: `### Contact DriverX Mobile\n\n<strong>Customer Support</strong>\n📞 Phone: <a href="tel:8003990087">800-399-0087</a>\n💬 Live Chat: <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">https://www.driverxmobile.com/24-7-driver-support/</a>\n📧 Email: <a href="mailto:info@driverxmobile.com">info@driverxmobile.com</a>\n\n<strong>Office Location</strong>\n418 Broadway, Suite R\nAlbany, NY 12207\n\n<strong>Support Hours</strong>\nMon-Sat: 8:30am - 8:30pm\nSunday: 10am - 6pm\n<em>Drivon AI available 24/7 after hours</em>\n\n<strong>Enterprise Sales</strong>\n👉 <a href="https://www.driverxmobile.com/contact-enterprise-sales/" target="_blank">https://www.driverxmobile.com/contact-enterprise-sales/</a>`,
+          chips: ["Support", "Partner", "Business", "Talk to a Human"],
+        },
+
+        human: {
+          text: `Totally get it — sometimes you just need a real human! 🧑‍💼\n\n<strong>📞 Call Us:</strong>\n<a href="tel:8003990087">800-399-0087</a>\n\n<strong>💬 Live Chat:</strong>\n<a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">driverxmobile.com/24-7-driver-support</a>\n\n<strong>📧 Email:</strong>\n<a href="mailto:info@driverxmobile.com">info@driverxmobile.com</a>\n\n<strong>🕐 Support Hours:</strong>\nMon–Sat: 8:30am – 8:30pm\nSunday: 10am – 6pm\n\nAfter hours? I'm (Drivon) here 24/7 and pretty handy!\n\n<strong>📍 Office:</strong>\n418 Broadway, Suite R, Albany, NY 12207\n\n<strong>🚨 Enterprise / Fleet customers?</strong>\n<a href="https://www.driverxmobile.com/contact-enterprise-sales/" target="_blank">Contact Enterprise Sales →</a>`,
+          chips: ["Browse plans", "Coverage check", "Account help"],
+        },
+
+        pricing: {
+          text: `We've designed our plans to fit every budget and driving style!\n\nIndividual plans range from budget-friendly to unlimited everything.\n\nThe best way to see exact pricing:\n👉 <a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">Prepaid Plans</a> — no contracts, most flexible\n👉 <a href="https://www.driverxmobile.com/postpaid-plans/" target="_blank">Postpaid Plans</a> — more perks, pay monthly\n👉 <a href="https://www.driverxmobile.com/business-plans/" target="_blank">Business/Fleet Plans</a> — for fleets\n\nWant help finding the right fit? Tell me how you drive and I'll point you to the best value plan!`,
+          chips: [
+            "Prepaid plans",
+            "Postpaid plans",
+            "Fleet plans",
+            "Talk to a Human",
+          ],
+        },
+
+        support: {
+          text: `Get help now:\n\n💬 <a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">24/7 Driver Support</a>\n📄 <a href="https://www.driverxmobile.com/faqs-self-service/" target="_blank">FAQs / Self-Service</a>\n📞 <a href="tel:8003990087">800-399-0087</a>\n\nIf you're a fleet customer, we can also route you to priority support.`,
+          chips: [
+            "Account help",
+            "SIM card issues",
+            "Contact",
+            "Talk to a Human",
+          ],
+        },
+
+        partner: {
+          text: `Partner with DriverX:\n\n🤝 <a href="https://www.driverxmobile.com/become-a-driverx-partner/" target="_blank">Become a DriverX Partner</a>\n🎁 <a href="https://www.driverxmobile.com/partner-offer-program/" target="_blank">Partner Offer Program</a>\n🏢 <a href="https://www.driverxmobile.com/partner-with-driverx/" target="_blank">Partnership Opportunities</a>`,
+          chips: ["Business", "Contact", "About", "Talk to a Human"],
+        },
+
+        about: {
+          text: `About DriverX Mobile:\n\nDriverX is wireless built specifically for drivers — gig drivers, fleet operators, delivery drivers, and everyone in between.\n\nOur mission is to give drivers a phone plan that actually fits how they work.\n\n👉 <a href="https://www.driverxmobile.com/about-us/" target="_blank">Learn More About DriverX →</a>`,
+          chips: ["Plans", "Business", "Partner", "Contact"],
+        },
+
+        closing: {
+          text: `Anything else I can help you with today?\n\nQuick links in case you need them:\n<ul><li><a href="https://www.driverxmobile.com/prepaid-plans/" target="_blank">All Plans</a></li><li><a href="https://www.driverxmobile.com/24-7-driver-support/" target="_blank">Support</a></li><li>Call us: <a href="tel:8003990087">800-399-0087</a></li></ul>\n\nDrive safe out there!`,
+          chips: ["Plans", "Help/Support", "Contact", "About"],
+        },
+
+        default: {
+          text: `Hmm, I want to make sure I give you the right answer! 🤔\n\nHere's what I can help with:\n<ul><li>📱 <strong>Plans</strong> — prepaid, postpaid, fleet, data-only</li><li>📡 <strong>Coverage</strong> — check your area or route</li><li>🔧 <strong>Account</strong> — login, billing, plan changes</li><li>📶 <strong>SIM / Activation</strong> — eSIM or physical SIM setup</li><li>🌍 <strong>International</strong> — calling & roaming</li><li>🎁 <strong>Driver Perks</strong> — fuel discounts, hotspot, cashback</li><li>🧑‍💼 <strong>Talk to a Human</strong> — call or live chat</li></ul>\n\nWhat would you like to know more about?`,
+          chips: [
+            "View plans",
+            "Coverage check",
+            "Account help",
+            "Driver perks",
+            "Talk to a Human",
+          ],
+        },
+      };
+
+      // ─── CLASSIFIER ─────────────────────────────────────────────────────────────
+      function classify(text) {
+        const t = text.toLowerCase().trim();
+
+        // Check for exact or near-exact chips first (highest priority)
+        const chipMap = {
+          1: "plans",
+          2: "account",
+          3: "coverage",
+          4: "human",
+          plans: "plans",
+          "view plans": "plans",
+          "browse plans": "plans",
+          "check out plans": "plans",
+          "check plans": "plans",
+          "show plans": "plans",
+          "i need a plan": "plans",
+          "need a plan": "plans",
+          "prepaid plans": "prepaid",
+          "prepaid details": "prepaid",
+          prepaid: "prepaid",
+          "postpaid plans": "postpaid",
+          "postpaid details": "postpaid",
+          postpaid: "postpaid",
+          starter: "prepaid",
+          cruise: "prepaid",
+          power: "prepaid",
+          unlimited: "prepaid",
+          flex: "postpaid",
+          essential: "postpaid",
+          infinite: "postpaid",
+          elite: "postpaid",
+          individual: "plans",
+          "what's the difference?": "plansdiff",
+          "whats the difference": "plansdiff",
+          "difference between prepaid and postpaid": "plansdiff",
+          "what's the difference between prepaid and postpaid": "plansdiff",
+          "whats the difference between prepaid and postpaid": "plansdiff",
+          "difference between prepaid and postpaid?": "plansdiff",
+          "fleet plans": "fleet",
+          "fleet solutions": "fleet",
+          "business plans": "fleet",
+          "small fleet": "fleet",
+          "large fleet": "fleet",
+          enterprise: "fleet",
+          business: "fleet",
+          "data-only plans": "dataonly",
+          "data only plans": "dataonly",
+          "data only": "dataonly",
+          "light data": "dataonly",
+          "medium data": "dataonly",
+          "heavy data": "dataonly",
+          "coverage check": "coverage",
+          "check coverage": "coverage",
+          "international roaming": "international",
+          "5g coverage": "fiveg",
+          "sim card issues": "sim",
+          "sim card issue": "sim",
+          "sim issue": "sim",
+          "simm issue": "sim",
+          "no sim": "sim",
+          "sim not detected": "sim",
+          "sim not working": "sim",
+          "activate sim": "activation",
+          activate: "activation",
+          activation: "activation",
+          "no service help": "noservice",
+          "no signal help": "noservice",
+          "i am having trouble with my service": "servicetrouble",
+          "i'm having trouble with my service": "servicetrouble",
+          "trouble with my service": "servicetrouble",
+          "replace sim": "sim",
+          "switching phones": "sim",
+          "switch phone": "sim",
+          "bringing their phone": "byod",
+          "bringing their mobile": "byod",
+          "bringing my phone": "byod",
+          "bringing their own phone": "byod",
+          "bringing phone": "byod",
+          "billing question": "billing",
+          "payment issue": "billing",
+          "payment failed": "billing",
+          invoice: "billing",
+          receipt: "billing",
+          "wrong charge": "billing",
+          "update payment": "billing",
+          "need invoice": "billing",
+          "something else": "account",
+          "i need a new plan": "newplan",
+          "calls are dropping": "servicetrouble",
+          "change my plan": "changeplan",
+          "change plan": "changeplan",
+          "manage plan": "changeplan",
+          upgrade: "changeplan",
+          "upgrade my plan": "changeplan",
+          "upgrade plan": "changeplan",
+          "downgrade my plan": "changeplan",
+          "downgrade plan": "changeplan",
+          "switch my plan": "changeplan",
+          "can't log in": "cantlogin",
+          "cant log in": "cantlogin",
+          "can't login": "cantlogin",
+          "cant login": "cantlogin",
+          "password reset": "cantlogin",
+          "forgot password": "cantlogin",
+          "reset password": "cantlogin",
+          "login issue": "cantlogin",
+          "login problem": "cantlogin",
+          "cancel service": "cancel",
+          "sign me up": "signup",
+          "sign up": "signup",
+          "keep my number": "keepnumber",
+          "bring my own phone": "byod",
+          "bring my phone": "byod",
+          compatible: "byod",
+          "is my phone compatible": "byod",
+          "hotspot info": "hotspot",
+          "hotspot details": "hotspot",
+          "data sharing": "hotspot",
+          "driver perks": "perks",
+          benefits: "perks",
+          offers: "perks",
+          "internet speed": "fiveg",
+          "i'm a uber/lyft/doordash driver": "gigdriver",
+          "im a uber/lyft/doordash driver": "gigdriver",
+          "uber/lyft/doordash driver": "gigdriver",
+          "i'm an uber driver": "gigdriver",
+          "i'm a delivery driver": "gigdriver",
+          "i drive part-time": "gigdriver",
+          "i run a fleet": "fleet",
+          "gig driver": "gigdriver",
+          uber: "gigdriver",
+          lyft: "gigdriver",
+          doordash: "gigdriver",
+          "delivery driver": "gigdriver",
+          "talk to a human": "human",
+          "talk to someone": "human",
+          "talk to agent": "human",
+          "real person": "human",
+          "customer care": "human",
+          "contact sales": "human",
+          "help/support": "support",
+          "help with account": "account",
+          plnas: "plans",
+          bilng: "billing",
+          help: "support",
+          support: "support",
+          partner: "partner",
+          contact: "contact",
+          about: "about",
+          thanks: "closing",
+          "thank you": "closing",
+          ok: "closing",
+          bye: "closing",
+          goodbye: "closing",
+          "no that's all": "closing",
+          "i'm frustrated": "support",
+          "this service is bad": "support",
+          "telematics integration": "fleet",
+          "account help": "account",
+          "coverage map": "coverage",
+          "rural areas": "coverage",
+        };
+
+        // Direct chip map lookup
+        if (chipMap[t]) return chipMap[t];
+
+        function escapeRegExp(s) {
+          return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }
+
+        function hasKeyword(text, keyword) {
+          const k = keyword.toLowerCase().trim();
+          if (!k) return false;
+          if (/^[a-z0-9]+$/.test(k)) {
+            const re = new RegExp(`\\b${escapeRegExp(k)}\\b`, "i");
+            return re.test(text);
+          }
+          return text.includes(k);
+        }
+
+        // Keyword scanning (ordered by specificity)
+        const orderedRoutes = [
+          "newplan",
+          "plansdiff",
+          "cantlogin",
+          "changeplan",
+          "prepaid",
+          "postpaid",
+          "fleet",
+          "servicetrouble",
+          "activation",
+          "hotspot",
+          "dataonly",
+          "international",
+          "noservice",
+          "cancel",
+          "signup",
+          "gigdriver",
+          "contact",
+          "human",
+          "support",
+          "partner",
+          "about",
+          "closing",
+          "keepnumber",
+          "byod",
+          "fiveg",
+          "billing",
+          "sim",
+          "coverage",
+          "perks",
+          "pricing",
+          "plans",
+          "account",
+          "greeting",
+        ];
+
+        for (const route of orderedRoutes) {
+          const keywords = routes[route];
+          if (keywords && keywords.some((k) => hasKeyword(t, k))) return route;
+        }
+
+        return "default";
+      }
+
+      function getResponse(input) {
+        const category = classify(input);
+        return responses[category] || responses.default;
+      }
+
+      // ─── UI HELPERS ─────────────────────────────────────────────────────────────
+      function timeStr() {
+        return new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function addMessage(text, sender, chips) {
+        const msgs = document.getElementById("messages");
+        const row = document.createElement("div");
+        row.className = `msg-row ${sender}`;
+
+        const avatar = document.createElement("div");
+        avatar.className = `msg-avatar ${sender === "user" ? "user" : "bot"}`;
+        avatar.textContent = sender === "user" ? "🧑" : "🚗";
+
+        const content = document.createElement("div");
+        content.className = "msg-content";
+
+        const bubble = document.createElement("div");
+        bubble.className = `bubble ${sender === "user" ? "user" : "bot"}`;
+        bubble.innerHTML = text.replace(/\n/g, "<br>");
+
+        const time = document.createElement("span");
+        time.className = "msg-time";
+        time.textContent = timeStr();
+
+        content.appendChild(bubble);
+
+        if (chips && chips.length) {
+          const chipWrap = document.createElement("div");
+          chipWrap.className = "chips";
+          chips.forEach((label) => {
+            const chip = document.createElement("button");
+            chip.className = "chip";
+            chip.textContent = label;
+            chip.onclick = () => sendMessage(label);
+            chipWrap.appendChild(chip);
+          });
+          content.appendChild(chipWrap);
+        }
+
+        content.appendChild(time);
+        row.appendChild(avatar);
+        row.appendChild(content);
+        msgs.appendChild(row);
+        msgs.scrollTop = msgs.scrollHeight;
+      }
+
+      function showTyping() {
+        const t = document.getElementById("typingIndicator");
+        t.style.display = "flex";
+        document.getElementById("messages").scrollTop =
+          document.getElementById("messages").scrollHeight;
+      }
+
+      function hideTyping() {
+        document.getElementById("typingIndicator").style.display = "none";
+      }
+
+      async function sendMessage(overrideText) {
+        const input = document.getElementById("userInput");
+        const text = (overrideText || input.value).trim();
+        if (!text) return;
+
+        addMessage(text, "user");
+        input.value = "";
+        input.style.height = "auto";
+
+        const btn = document.getElementById("sendBtn");
+        btn.disabled = true;
+        showTyping();
+
+        await new Promise((r) => setTimeout(r, 800 + Math.random() * 500));
+        hideTyping();
+
+        const resp = getResponse(text);
+        addMessage(resp.text, "bot", resp.chips);
+        btn.disabled = false;
+      }
+
+      function handleKey(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      }
+
+      function autoResize(el) {
+        el.style.height = "auto";
+        el.style.height = Math.min(el.scrollHeight, 120) + "px";
+      }
+
+      function clearChat() {
+        const msgs = document.getElementById("messages");
+        msgs.innerHTML = "";
+        addMessage(
+          "Chat cleared! 👋 Hey again — I'm <strong>Drivon</strong>, your DriverX Mobile AI assistant.\n\nWhat brings you here today?",
+          "bot",
+          [
+            "View Plans",
+            "Coverage Check",
+            "Account Help",
+            "Driver Perks",
+            "Talk to a Human",
+          ],
+        );
+      }
+    </script>
+  </body>
+</html>

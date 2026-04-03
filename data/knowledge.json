@@ -1,0 +1,628 @@
+﻿{
+  "fallback": "Hmm, we didn't find exactly what you're looking for.\n\nTry searching for:\n- plans - See all our service plans\n- coverage - Check coverage in your area\n- support - Get help with your account\n- activate - Start your service\n- business - Fleet and business solutions\n\nOr contact us directly:\nPhone: 800-399-0087\nLive chat: https://www.driverxmobile.com/24-7-driver-support/\n\nWe're here to help!",
+  "default_suggestions": [
+    "Check out plans",
+    "Get help with my account",
+    "Ask about coverage",
+    "Talk to a real person"
+  ],
+  "intents": [
+    {
+      "id": "welcome",
+      "keywords": [
+        "hi",
+        "hello",
+        "hey",
+        "start",
+        "menu",
+        "help me",
+        "what can you do"
+      ],
+      "response": "Hey there! Welcome to DriverX Mobile - wireless built for drivers like you.\n\nWhat brings you here today?\n1. Check out plans\n2. Get help with my account\n3. Ask about coverage\n4. Talk to a real person",
+      "suggestions": [
+        "Check out plans",
+        "Get help with my account",
+        "Ask about coverage",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "plans_menu",
+      "keywords": [
+        "1",
+        "plans",
+        "check out plans",
+        "view plans",
+        "see plans",
+        "new plan"
+      ],
+      "response": "Great! What kind of plan works for you?\n\nIndividual Drivers\n- Prepaid (pay as you go)\n- Postpaid (pay monthly)\n\nFleet/Business\n- Small fleet (5-20 vehicles)\n- Larger operation (20+ vehicles)\n\nData Only\n- Tablets, hotspots, IoT devices\n\nJust tell me which one!",
+      "suggestions": ["Prepaid", "Postpaid", "Small fleet", "Data only"]
+    },
+    {
+      "id": "new_plan",
+      "keywords": [
+        "i need a new plan",
+        "need a new plan",
+        "get a plan",
+        "new plan",
+        "help me choose plan"
+      ],
+      "response": "Got it! Are you currently a driver, or running a fleet?\n\nAnd are you looking for prepaid or postpaid? If you're not sure yet, that's totally fine too.",
+      "suggestions": [
+        "Individual driver",
+        "Fleet / business",
+        "Prepaid",
+        "Postpaid"
+      ]
+    },
+    {
+      "id": "prepaid",
+      "keywords": [
+        "prepaid",
+        "pay as you go",
+        "no contract",
+        "no credit check"
+      ],
+      "response": "Perfect! Our prepaid plans are super flexible - no contracts, no credit checks.\n\nWe've got 4 options:\n- Starter - Light users, weekend drivers\n- Cruise - Regular daily drivers\n- Power - Heavy app users\n- Unlimited - Full-time, always on the road\n\nWhich sounds like you?",
+      "suggestions": ["Starter", "Cruise", "Power", "Unlimited"]
+    },
+    {
+      "id": "starter",
+      "keywords": ["starter", "light user", "weekend driver"],
+      "response": "Nice! That's a solid pick for light users and weekend drivers.\n\nCheck all the details and sign up here:\nhttps://www.driverxmobile.com/prepaid-plans/\n\nNeed help choosing? I'm here!",
+      "suggestions": [
+        "Compare with Cruise",
+        "See prepaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "cruise",
+      "keywords": ["cruise", "regular daily"],
+      "response": "Nice! That's a solid pick for regular daily drivers.\n\nCheck all the details and sign up here:\nhttps://www.driverxmobile.com/prepaid-plans/\n\nNeed help choosing? I'm here!",
+      "suggestions": [
+        "Compare with Power",
+        "See prepaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "power",
+      "keywords": ["power", "heavy app"],
+      "response": "Nice! That's a solid pick for heavy app users.\n\nCheck all the details and sign up here:\nhttps://www.driverxmobile.com/prepaid-plans/\n\nNeed help choosing? I'm here!",
+      "suggestions": [
+        "Compare with Unlimited",
+        "See prepaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "unlimited",
+      "keywords": ["unlimited", "full time", "always on the road"],
+      "response": "Nice! That's a solid pick for full-time drivers.\n\nCheck all the details and sign up here:\nhttps://www.driverxmobile.com/prepaid-plans/\n\nNeed help choosing? I'm here!",
+      "suggestions": [
+        "See prepaid plans",
+        "Compare options",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "postpaid",
+      "keywords": ["postpaid", "pay monthly", "pay later", "month end"],
+      "response": "Got it! Postpaid gives you more flexibility - work now, pay later.\n\nWe've got:\n- Flex - Part-timers\n- Essential - Daily drivers\n- Infinite - Full-time multi-app\n- Elite - High earners, premium features\n\nWhat fits your driving style?",
+      "suggestions": ["Flex", "Essential", "Infinite", "Elite"]
+    },
+    {
+      "id": "flex",
+      "keywords": ["flex", "part timer", "part-time"],
+      "response": "That's a great match for part-time driving.\n\nCheck out the full details here:\nhttps://www.driverxmobile.com/postpaid-plans/\n\nQuestions? Just ask!",
+      "suggestions": [
+        "Compare with Essential",
+        "See postpaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "essential",
+      "keywords": ["essential", "daily driver"],
+      "response": "That's a great match for daily driving.\n\nCheck out the full details here:\nhttps://www.driverxmobile.com/postpaid-plans/\n\nQuestions? Just ask!",
+      "suggestions": [
+        "Compare with Infinite",
+        "See postpaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "infinite",
+      "keywords": ["infinite", "multi app", "multi-app"],
+      "response": "That's a great match for full-time multi-app driving.\n\nCheck out the full details here:\nhttps://www.driverxmobile.com/postpaid-plans/\n\nQuestions? Just ask!",
+      "suggestions": [
+        "Compare with Elite",
+        "See postpaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "elite",
+      "keywords": ["elite", "high earner", "premium features"],
+      "response": "That's a great match for high earners who want premium features.\n\nCheck out the full details here:\nhttps://www.driverxmobile.com/postpaid-plans/\n\nQuestions? Just ask!",
+      "suggestions": [
+        "Compare with Infinite",
+        "See postpaid plans",
+        "Pricing",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "small_fleet",
+      "keywords": ["small fleet", "5-20", "5 to 20", "fleet business"],
+      "response": "Nice! Running a fleet is no joke. We make it easier.\n\nOur business plans include:\n- Centralized billing\n- Fleet management dashboard\n- Shared data pools\n- GPS tracking options\n\nSee what fits your operation:\nhttps://www.driverxmobile.com/business-plans/\n\nWant to talk specifics? Let me know!",
+      "suggestions": [
+        "Larger operation",
+        "Talk to enterprise team",
+        "Call 800-399-0087"
+      ]
+    },
+    {
+      "id": "large_fleet",
+      "keywords": ["larger operation", "large fleet", "20+", "enterprise"],
+      "response": "That's what we're talking about! For bigger fleets, we customize everything.\n\nYou'll get:\n- Dedicated account manager\n- Custom data packages\n- Full telematics integration\n- Priority support line\n\nLet's connect you with our enterprise team:\nhttps://www.driverxmobile.com/contact-enterprise-sales/\n\nOr call us: 800-399-0087",
+      "suggestions": [
+        "Small fleet",
+        "Partner with DriverX",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "data_only",
+      "keywords": ["data only", "data-only", "tablet", "hotspot device", "iot"],
+      "response": "Smart! Data-only plans are perfect for tablets, backup devices, or IoT.\n\nWe've got 3 tiers based on how much data you need:\n- Light use\n- Medium use\n- Heavy use\n\nPlus you can add voice/text anytime.\n\nHere's the breakdown:\nhttps://www.driverxmobile.com/data-only-plans/",
+      "suggestions": [
+        "Hotspot",
+        "Coverage",
+        "How do I sign up?",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "account_menu",
+      "keywords": [
+        "2",
+        "account help",
+        "get help with my account",
+        "my account",
+        "account issues"
+      ],
+      "response": "I've got you! What's going on?\n1. Can't log in\n2. Need to change my plan\n3. Payment/billing question\n4. SIM card issues\n5. Something else",
+      "suggestions": [
+        "Can't log in",
+        "Change my plan",
+        "Billing question",
+        "SIM card issues"
+      ]
+    },
+    {
+      "id": "login_help",
+      "keywords": [
+        "can't log in",
+        "cant log in",
+        "forgot password",
+        "login issue",
+        "password reset"
+      ],
+      "response": "No worries, happens to everyone.\n\nQuick fixes:\n- Try resetting your password at My DriverX\n- Clear your browser cache\n- Make sure you're using the email you signed up with\n\nStill stuck?\nCall: 800-399-0087\nLive chat: https://www.driverxmobile.com/24-7-driver-support/\n\nWe'll get you back in fast!",
+      "suggestions": [
+        "Change my plan",
+        "Billing question",
+        "SIM card issue",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "change_plan",
+      "keywords": [
+        "change my plan",
+        "change plan",
+        "upgrade",
+        "downgrade",
+        "switch plan"
+      ],
+      "response": "Easy! You can upgrade, downgrade, or switch anytime.\n\nBest way to do it:\n1. Log into My DriverX\n2. Go to Manage Plan\n3. Pick your new plan\n\nChanges take effect at your next billing cycle.\n\nNeed help deciding which plan?\nhttps://www.driverxmobile.com/prepaid-plans/\nhttps://www.driverxmobile.com/postpaid-plans/\n\nOr I can help you figure it out right here!",
+      "suggestions": [
+        "Prepaid",
+        "Postpaid",
+        "Billing question",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "billing_help",
+      "keywords": [
+        "billing",
+        "payment",
+        "charge",
+        "invoice",
+        "receipt",
+        "payment declined",
+        "update payment method"
+      ],
+      "response": "Got it. Here's how to handle common billing issues:\n\n- Update payment method: My DriverX -> Account Settings -> Payment Methods\n- Didn't receive invoice: Check your email (including spam) or download from My DriverX\n- Payment declined: Check card details, ensure sufficient funds, contact your bank\n- Don't understand a charge: Call us and we'll walk you through it\n\nFor detailed billing help:\nPhone: 800-399-0087\nLive chat: https://www.driverxmobile.com/24-7-driver-support/",
+      "suggestions": [
+        "Update payment method",
+        "Need invoice",
+        "Don't understand a charge",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "no_service_troubleshooting",
+      "keywords": [
+        "no service",
+        "no signal",
+        "no bars",
+        "bars but no data",
+        "troubleshooting no service",
+        "service not available"
+      ],
+      "response": "Search: \"no service\" or \"no signal\"\n\n### Troubleshooting No Service\n\nQuick fixes:\n1. Restart your phone\n2. Toggle Airplane Mode on/off\n3. Check if you have bars but no data - might need to update APN settings\n4. Make sure your bill is paid\n\nStill not working?\n📞 Call us immediately: 800-399-0087\n💬 Chat: https://www.driverxmobile.com/24-7-driver-support/\n\nWe can check for outages or issues with your account right away.",
+      "suggestions": [
+        "Call 800-399-0087",
+        "Chat with support",
+        "SIM card issues",
+        "Billing question"
+      ]
+    },
+    {
+      "id": "sim_help",
+      "keywords": [
+        "sim card",
+        "sim issue",
+        "sim not recognized",
+        "replacement sim",
+        "switching phones"
+      ],
+      "response": "Ugh, SIM problems are annoying. Let's fix it.\n\nWhat's happening?\n- No signal/service\n- SIM not recognized\n- Need a replacement\n- Switching phones\n\nQuick fixes:\n1. Restart your phone\n2. Toggle Airplane Mode on/off\n3. Check if you have bars but no data - you may need to update APN settings\n4. Make sure your bill is paid\n\nIf that doesn't work:\nCall: 800-399-0087 (we can ship a replacement same day)\nChat: https://www.driverxmobile.com/24-7-driver-support/",
+      "suggestions": [
+        "Need replacement SIM",
+        "Switching phones",
+        "Activation help",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "service_trouble",
+      "keywords": [
+        "trouble with my service",
+        "data not working",
+        "calls dropping",
+        "service issue",
+        "not working"
+      ],
+      "response": "Ah man, that's frustrating. Let me help!\n\nAre you:\n- Not getting signal\n- Data not working\n- Calls dropping\n- Something else\n\nAnd when did this start?\n\nFor immediate help:\nPhone: 800-399-0087",
+      "suggestions": [
+        "No signal",
+        "Data not working",
+        "Calls dropping",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "coverage_intro",
+      "keywords": [
+        "3",
+        "coverage",
+        "ask about coverage",
+        "coverage map",
+        "signal",
+        "network"
+      ],
+      "response": "Coverage is everything when you're driving! I hear you.\n\nWhere are you mainly driving?\n- City/metro area\n- Suburbs\n- Rural/highways\n- All over\n\nOr just tell me your zip code and I can check!",
+      "suggestions": ["City / metro", "Suburbs", "Rural / highways", "All over"]
+    },
+    {
+      "id": "coverage_check",
+      "keywords": [
+        "city",
+        "metro",
+        "suburbs",
+        "rural",
+        "highway",
+        "all over",
+        "coverage in",
+        "dead zones"
+      ],
+      "response": "We run on Tier-1 nationwide coverage - same network as the big guys but way better prices.\n\nCheck your exact area here:\nhttps://mvnoc.ai/coverage-map\n\nHave coverage questions for your routes?\n📞 Call us: 800-399-0087\n\nMost drivers tell us signal is solid in cities, suburbs, and highways. If you've got a specific route you're worried about, let me know.",
+      "suggestions": [
+        "Check coverage map",
+        "Share my zip code",
+        "Plans for gig drivers",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "contact_human",
+      "keywords": [
+        "4",
+        "talk to a real person",
+        "talk to someone",
+        "human",
+        "agent",
+        "representative",
+        "contact"
+      ],
+      "response": "Totally get it - sometimes you just need a human!\n\nCall us: 800-399-0087\nLive chat: https://www.driverxmobile.com/24-7-driver-support/\nEmail: info@driverxmobile.com\nOffice: 418 Broadway, Suite R, Albany, NY 12207\n\nHours:\nMon-Sat: 8:30am - 8:30pm\nSunday: 10am - 6pm\n\nAfter hours? Drivon AI is available 24/7 and pretty helpful.\n\nWant me to help with anything while you're here?",
+      "suggestions": [
+        "Check out plans",
+        "Ask about coverage",
+        "Get help with my account",
+        "Driver perks"
+      ]
+    },
+    {
+      "id": "plan_difference",
+      "keywords": [
+        "difference between prepaid and postpaid",
+        "prepaid vs postpaid",
+        "which is better prepaid or postpaid"
+      ],
+      "response": "Great question!\n\nPrepaid = Pay upfront each month. No contracts, no credit check. Perfect if you want full control.\n\nPostpaid = Use it now, pay at month end. A bit more flexibility, plus extra perks like device financing.\n\nBoth get you the same awesome network.\n\nWhich sounds better for you?",
+      "suggestions": [
+        "Prepaid",
+        "Postpaid",
+        "I'm not sure yet",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "activation",
+      "keywords": [
+        "activate",
+        "activation",
+        "activate sim",
+        "esim",
+        "physical sim",
+        "sign up",
+        "how do i sign up",
+        "get started"
+      ],
+      "response": "How to Activate Your SIM\n\nGot an eSIM?\nCheck your email for the QR code, scan it, and follow the prompts. Takes 2 minutes.\n\nGot a physical SIM?\n1. Pop it in your phone\n2. Go to driverxmobile.com/activate\n3. Enter the SIM number (on the card)\n4. Follow the steps\n\nNeed help?\nPhone: 800-399-0087\nChat with us: https://www.driverxmobile.com/24-7-driver-support/",
+      "suggestions": [
+        "Prepaid",
+        "Postpaid",
+        "SIM card issues",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "international",
+      "keywords": [
+        "international",
+        "roaming",
+        "abroad",
+        "outside us",
+        "international calling",
+        "international texting"
+      ],
+      "response": "Good question! We've got you covered internationally.\n\nAll plans include:\n- Free international texting\n- Free calls to 100+ countries (varies by plan)\n- Roaming options on select plans\n\nSee which plan has what:\nhttps://www.driverxmobile.com/prepaid-plans/\nhttps://www.driverxmobile.com/postpaid-plans/\n\nPlanning to drive abroad? Let me know where!",
+      "suggestions": [
+        "Prepaid",
+        "Postpaid",
+        "Talk to support",
+        "How do I sign up?"
+      ]
+    },
+    {
+      "id": "hotspot",
+      "keywords": ["hotspot", "wifi", "wi-fi", "tethering", "mobile hotspot"],
+      "response": "Yep! All our plans include mobile hotspot.\n\nYou get anywhere from 1GB to 50GB depending on your plan.\n\nPerfect for:\n- Passengers who need WiFi\n- Your tablet/laptop\n- Backup internet at home\n\nHow to turn it on:\n- iPhone: Settings -> Personal Hotspot -> Turn On\n- Android: Settings -> Network -> Hotspot & Tethering\n\nNeed more hotspot? Add more through My DriverX or call: 800-399-0087\n\nCheck plans: https://www.driverxmobile.com/prepaid-plans/",
+      "suggestions": [
+        "See plans with hotspot",
+        "Add more hotspot data",
+        "Check coverage",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "byod",
+      "keywords": [
+        "bring my phone",
+        "bring your own",
+        "byod",
+        "compatible",
+        "gsm",
+        "unlocked phone",
+        "keep my phone"
+      ],
+      "response": "Absolutely! Bring your phone, keep your number.\n\nAs long as it's unlocked and GSM-compatible, you're good to go.\n\nNot sure? We can check compatibility when you sign up, or call us with your phone model: 800-399-0087\n\nStart here:\nhttps://www.driverxmobile.com/prepaid-plans/",
+      "suggestions": [
+        "Can I keep my number?",
+        "How do I sign up?",
+        "Prepaid",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "keep_number",
+      "keywords": [
+        "keep my number",
+        "transfer my number",
+        "port my number",
+        "can i keep my number"
+      ],
+      "response": "Yes! 100%.\n\nWhen you sign up, there's a simple step to transfer your number. It usually takes a few hours, sometimes up to 24.\n\nYou won't lose service during the switch.",
+      "suggestions": [
+        "Bring my phone",
+        "How do I sign up?",
+        "Prepaid",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "driver_perks",
+      "keywords": [
+        "driver perks",
+        "benefits",
+        "fuel discount",
+        "cashback",
+        "priority data",
+        "tax deduction"
+      ],
+      "response": "We've got perks!\n\nWith DriverX you get:\n- Fuel and service discounts\n- Cashback programs\n- Priority data for gig apps (Uber, Lyft, DoorDash, etc.)\n- Free device health checks\n- Tax deduction reports (postpaid plans)\n- Partner deals on maintenance, insurance, and legal\n\nIt's not just a phone plan - it's support for your whole driving business.\n\nSee everything:\nhttps://www.driverxmobile.com/prepaid-plans/",
+      "suggestions": [
+        "Gig driver plans",
+        "Postpaid",
+        "Partner with DriverX",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "five_g",
+      "keywords": ["5g", "lte", "5g coverage", "fast speed"],
+      "response": "Yes! All our plans include 5G access where available.\n\nYou'll get the fastest speeds in your area automatically - 5G, LTE, whatever's strongest.\n\nNo extra charge and no special plan needed.",
+      "suggestions": [
+        "Coverage",
+        "Check out plans",
+        "Hotspot",
+        "Talk to support"
+      ]
+    },
+    {
+      "id": "pricing",
+      "keywords": ["pricing", "how much", "cost", "price", "budget"],
+      "response": "We've designed our plans to fit every budget and driving style.\n\nIndividual plans range from budget-friendly to unlimited everything.\n\nBest way to compare:\nhttps://www.driverxmobile.com/prepaid-plans/ (no contracts)\nhttps://www.driverxmobile.com/postpaid-plans/ (more flexibility)\n\nWant help finding the right fit? Tell me how you drive!",
+      "suggestions": ["I'm full-time", "I'm part-time", "Prepaid", "Postpaid"]
+    },
+    {
+      "id": "gig_driver",
+      "keywords": [
+        "uber",
+        "lyft",
+        "doordash",
+        "instacart",
+        "gig driver",
+        "rideshare",
+        "delivery driver"
+      ],
+      "response": "Perfect! That's literally what we built DriverX for.\n\nSince you're on a gig platform, you probably need:\n- Solid data that doesn't cut out\n- Good hotspot for downtime\n- Reliable GPS/navigation\n\nWith DriverX you get:\n- Priority data for gig apps\n- Built-in hotspot\n- Fuel discounts and cashback\n- 24/7 driver support\n\nSee plans:\nhttps://www.driverxmobile.com/gig-delivery-driver-plans/\nhttps://www.driverxmobile.com/prepaid-plans/\n\nAre you full-time or part-time?",
+      "suggestions": [
+        "I'm full-time",
+        "I'm part-time",
+        "Driver perks",
+        "Coverage"
+      ]
+    },
+    {
+      "id": "cancel",
+      "keywords": [
+        "cancel",
+        "cancellation",
+        "stop service",
+        "return sim",
+        "refund"
+      ],
+      "response": "Cancellation and returns:\n\nPrepaid plans:\nSimply don't renew next month. No penalties, no fees.\n\nPostpaid plans:\nCall us at 800-399-0087 to process cancellation.\n\nUnused SIM returns:\n30-day return policy for unused SIMs.\n\nDetails: https://www.driverxmobile.com/24-7-driver-support/",
+      "suggestions": [
+        "Talk to support",
+        "Change my plan",
+        "See all plans",
+        "Call 800-399-0087"
+      ]
+    },
+    {
+      "id": "fleet_and_business",
+      "keywords": [
+        "fleet",
+        "business",
+        "telematics",
+        "iot",
+        "fleet management",
+        "enterprise sales"
+      ],
+      "response": "Fleet and Business Solutions:\n\nSmall fleets (5-20 vehicles):\n- Centralized billing\n- Fleet management dashboard\n- Shared data pools\n- GPS tracking options\nhttps://www.driverxmobile.com/business-plans/\n\nLarger operations (20+ vehicles):\n- Dedicated account manager\n- Custom data packages\n- Full telematics integration\n- Priority support line\nhttps://www.driverxmobile.com/contact-enterprise-sales/\n\nTelematics and IoT:\nhttps://www.driverxmobile.com/fleet-logistics-connectivity/\nhttps://www.driverxmobile.com/telematics-iot-integrations/\n\nPhone: 800-399-0087",
+      "suggestions": [
+        "Small fleet",
+        "Larger operation",
+        "Partner with DriverX",
+        "Talk to enterprise team"
+      ]
+    },
+    {
+      "id": "support_search",
+      "keywords": [
+        "support",
+        "help",
+        "faq",
+        "self service",
+        "24/7 support",
+        "fleet priority line"
+      ],
+      "response": "Get Help Now:\n\n24/7 Support Options\nhttps://www.driverxmobile.com/24-7-driver-support/\nPhone: 800-399-0087\n\nSelf-Service Help (FAQs)\nhttps://www.driverxmobile.com/faqs-self-service/\n\nFleet Priority Line (5+ lines)\nhttps://www.driverxmobile.com/fleet-priority-line/",
+      "suggestions": [
+        "Account help",
+        "Activation",
+        "Coverage",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "partner",
+      "keywords": [
+        "partner",
+        "partner offer",
+        "become a partner",
+        "partnership opportunities"
+      ],
+      "response": "Partner With DriverX:\n\nBecome a Partner\nhttps://www.driverxmobile.com/become-a-driverx-partner/\n\nPartner Offers Program\nhttps://www.driverxmobile.com/partner-offer-program/\n\nPartnership Opportunities\nhttps://www.driverxmobile.com/partner-with-driverx/",
+      "suggestions": [
+        "Fleet and business",
+        "Driver perks",
+        "Talk to a real person",
+        "About DriverX"
+      ]
+    },
+    {
+      "id": "about",
+      "keywords": [
+        "about",
+        "about us",
+        "who are you",
+        "what is driverx",
+        "mission",
+        "company"
+      ],
+      "response": "About DriverX Mobile:\n\nDriverX is wireless built specifically for drivers - gig drivers, fleet operators, delivery drivers, and everyone in between.\n\nOur mission: give drivers a phone plan that actually works for their lifestyle.\n\nLearn more: https://www.driverxmobile.com/about-us/\n\nOur solutions:\n- Gig and Delivery: https://www.driverxmobile.com/gig-delivery-driver-plans/\n- Fleet and Logistics: https://www.driverxmobile.com/fleet-logistics-connectivity/\n- Telematics and IoT: https://www.driverxmobile.com/telematics-iot-integrations/\n\nPhone: 800-399-0087\nEmail: info@driverxmobile.com",
+      "suggestions": [
+        "Check out plans",
+        "Fleet and business",
+        "Partner with DriverX",
+        "Talk to a real person"
+      ]
+    },
+    {
+      "id": "closing",
+      "keywords": [
+        "thanks",
+        "thank you",
+        "bye",
+        "goodbye",
+        "that's all",
+        "done"
+      ],
+      "response": "Anything else I can help you with today?\n\nQuick links in case you need them:\n- All Plans: https://www.driverxmobile.com/prepaid-plans/\n- Support: https://www.driverxmobile.com/24-7-driver-support/\n- Call us: 800-399-0087\n\nDrive safe out there!",
+      "suggestions": [
+        "Check out plans",
+        "Ask about coverage",
+        "Talk to a real person",
+        "Driver perks"
+      ]
+    }
+  ]
+}

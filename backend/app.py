@@ -189,15 +189,7 @@ def chat(payload: MessageRequest) -> ChatResponse:
     )
 
 
+
+# This must be LAST — after all routes
 if FRONTEND_DIR.exists():
-    assets_dir = FRONTEND_DIR / "assets"
-    if assets_dir.exists():
-        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="frontend-assets")
-
-
-@app.get("/")
-def serve_frontend() -> FileResponse:
-    index_path = FRONTEND_DIR / "index.html"
-    if not index_path.exists():
-        raise HTTPException(status_code=404, detail="Frontend not found")
-    return FileResponse(index_path)
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")

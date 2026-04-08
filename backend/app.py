@@ -190,7 +190,9 @@ def chat(payload: MessageRequest) -> ChatResponse:
 
 
 if FRONTEND_DIR.exists():
-    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIR)), name="frontend-assets")
+    assets_dir = FRONTEND_DIR / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="frontend-assets")
 
 
 @app.get("/")
